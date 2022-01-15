@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% if error %}
+        <div class="alert alert-danger" >{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+<div class="card bg-dark text-white">
+    <img class="card-img background" src="{{ asset('img/login-page.jpg') }}" alt="Card image">
+    <div class="card-img-overlay">
+    <form class="form-group mx-5 login-custom" action="{{ path('login') }}" method="post">
+        <label for="username">Votre adresse email :</label>
+        <input class="form-control mt-2" type="text" id="username" name="_username" value="{{ last_username }}"/>
+
+        <label for="password">Votre mot de passe :</label>
+        <input class="form-control mt-2" type="password" id="password" name="_password"/>
+
+        {# If you want to control the URL the user is redirected to on success#}
+        <input type="hidden" name="_target_path" value="/homepage"/>
+
+        <button class="btn btn-primary mt-2" type="submit">login</button>
+    </form>
+    </div>
+</div>
+{% endblock %}
