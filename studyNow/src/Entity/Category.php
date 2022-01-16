@@ -25,18 +25,19 @@ class Category
     private $name;
 
     /**
-     * @ORM\OneToOne(targetEntity=Tutorial::class, mappedBy="category", cascade={"persist", "remove"})
-     */
-    private $tutorial;
-
-    /**
      * @ORM\OneToMany(targetEntity=SubCategory::class, mappedBy="category")
      */
     private $subcategory;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Tutorial::class, mappedBy="lecategory")
+     */
+    private $letutorial;
+
     public function __construct()
     {
         $this->subcategory = new ArrayCollection();
+        $this->letutorial = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -97,6 +98,40 @@ class Category
             // set the owning side to null (unless already changed)
             if ($subcategory->getCategory() === $this) {
                 $subcategory->setCategory(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __toString() {
+        return $this->name;
+    }
+
+    /**
+     * @return Collection|Tutorial[]
+     */
+    public function getLetutorial(): Collection
+    {
+        return $this->letutorial;
+    }
+
+    public function addLetutorial(Tutorial $letutorial): self
+    {
+        if (!$this->letutorial->contains($letutorial)) {
+            $this->letutorial[] = $letutorial;
+            $letutorial->setLecategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLetutorial(Tutorial $letutorial): self
+    {
+        if ($this->letutorial->removeElement($letutorial)) {
+            // set the owning side to null (unless already changed)
+            if ($letutorial->getLecategory() === $this) {
+                $letutorial->setLecategory(null);
             }
         }
 

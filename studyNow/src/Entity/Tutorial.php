@@ -24,10 +24,6 @@ class Tutorial
      */
     private $name;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $difficulty;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -44,11 +40,18 @@ class Tutorial
      */
     private $steps;
 
+
     /**
-     * @ORM\OneToOne(targetEntity=Category::class, inversedBy="tutorial", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="letutorial")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $category;
+    private $lecategory;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Dificulty::class, inversedBy="tutorial")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $ledifficulty;
 
     public function __construct()
     {
@@ -73,17 +76,6 @@ class Tutorial
         return $this;
     }
 
-    public function getDifficulty(): ?string
-    {
-        return $this->difficulty;
-    }
-
-    public function setDifficulty(string $difficulty): self
-    {
-        $this->difficulty = $difficulty;
-
-        return $this;
-    }
 
     public function getDescription(): ?string
     {
@@ -154,14 +146,27 @@ class Tutorial
         return $this;
     }
 
-    public function getCategory(): ?Category
+
+    public function getLecategory(): ?Category
     {
-        return $this->category;
+        return $this->lecategory;
     }
 
-    public function setCategory(Category $category): self
+    public function setLecategory(?Category $lecategory): self
     {
-        $this->category = $category;
+        $this->lecategory = $lecategory;
+
+        return $this;
+    }
+
+    public function getLedifficulty(): ?Dificulty
+    {
+        return $this->ledifficulty;
+    }
+
+    public function setLedifficulty(?Dificulty $ledifficulty): self
+    {
+        $this->ledifficulty = $ledifficulty;
 
         return $this;
     }
