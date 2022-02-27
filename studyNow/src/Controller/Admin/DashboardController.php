@@ -6,6 +6,7 @@ use App\Entity\Category;
 use App\Entity\Dificulty;
 use App\Entity\Steps;
 use App\Entity\Tutorial;
+use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -35,5 +36,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Categories', 'fas fa-newspaper', Category::class);
         yield MenuItem::linkToCrud('Steps of Tutorial', 'fas fa-newspaper', Steps::class);
         yield MenuItem::linkToCrud('Difficulty', 'fas fa-newspaper', Dificulty::class);
+        yield MenuItem::linkToCrud('Users', 'fas fa-newspaper', User::class);
     }
 }

@@ -1,0 +1,20 @@
+vich_uploader:
+    db_driver: orm
+    twig: true
+
+
+    mappings:
+            user:
+                uri_prefix: '%uploads_path%'
+                upload_destination: '%kernel.project_dir%\public%uploads_path%'
+                namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+
+                inject_on_load: false
+                delete_on_update: true
+                delete_on_remove: true
+#        formation_thumbnail:
+#            uri_prefix: '%uploads_path%'
+#            upload_destination: '%kernel.project_dir%/public/%uploads_path%'
+#        steps_thumbnail:
+#            uri_prefix: '%uploads_path%'
+#            upload_destination: '%kernel.project_dir%/public/%uploads_path%'

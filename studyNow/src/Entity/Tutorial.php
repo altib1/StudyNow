@@ -28,7 +28,18 @@ class Tutorial
     /**
      * @ORM\Column(type="text", nullable=true)
      */
+    private $profile_pic;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+
+    private $banner_pic;
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
     private $description;
+
 
     /**
      * @ORM\ManyToMany(targetEntity=User::class, mappedBy="tutorial")
@@ -167,6 +178,30 @@ class Tutorial
     public function setLedifficulty(?Dificulty $ledifficulty): self
     {
         $this->ledifficulty = $ledifficulty;
+
+        return $this;
+    }
+
+    public function getProfilePic(): ?string
+    {
+        return $this->profile_pic;
+    }
+
+    public function setProfilePic(?string $profile_pic): self
+    {
+        $this->profile_pic = $profile_pic;
+
+        return $this;
+    }
+
+    public function getBannerPic(): ?string
+    {
+        return $this->banner_pic;
+    }
+
+    public function setBannerPic(?string $banner_pic): self
+    {
+        $this->banner_pic = $banner_pic;
 
         return $this;
     }
