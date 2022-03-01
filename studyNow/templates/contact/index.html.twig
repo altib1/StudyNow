@@ -1,11 +1,16 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-    <div class="example-wrapper">
+    <div class="example-wrapper mt-5 mb-5">
         <div class="flex justify-content-center">
-            <div class="rounded-lg shadow-lg bg-white max-w-xl w-100">
+            <div class="rounded-lg shadow-sm bg-white max-w-xl w-100">
                 <div class="p-6">
-
-                    <h1 class="mb-4 align-content-center text-black-50"> Nous Contacter !</h1>
+                    <div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+                        <div class="max-w-md w-full space-y-8">
+                            <img src="{{ asset('./img/logo.png') }}" class="justify-content-center"
+                                 alt="" loading="lazy" />
+                            <div class="justify-content-center">
+                                <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">remplisez les informations!</h2>
+                            </div>
         <div class="form-group">
 
             {{ form_start(form) }}
@@ -67,5 +72,8 @@
             </div>
         </div>
     </div>
+        </div>
+    </div>
+
 
 {% endblock %}

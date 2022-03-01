@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Tutorial;
 use App\Entity\User;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -19,11 +20,12 @@ class HomepageController extends AbstractController
     {
 
         $category = $em->getRepository(Category::class)->findAll();
+        $tutorial = $em->getRepository(Tutorial::class)->findAll();
 //        $user = $em->getRepository(User::class)->
         return $this->render('homepage/index.html.twig', [
             'controller_name' => 'HomepageController',
              'category'=>$category,
-            ''
+            'tutorial' => $tutorial,
         ]);
     }
 }

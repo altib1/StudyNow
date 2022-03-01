@@ -1,6 +1,8 @@
 <?php
 namespace App\Controller;
+use App\Entity\Category;
 use App\Form\ContactType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mime\Email;
@@ -11,7 +13,7 @@ class ContactController extends AbstractController
     /**
      * @Route("/contact", name="contact")
      */
-    public function index(Request $request, MailerInterface $mailer)
+    public function index(Request $request, MailerInterface $mailer, EntityManagerInterface $em)
     {
         $form = $this->createForm(ContactType::class);
         $form->handleRequest($request);
@@ -29,8 +31,11 @@ class ContactController extends AbstractController
             $this->addFlash('success', 'Vore message a été envoyé');
             return $this->redirectToRoute('homepage');
         }
+
+        $category = $em->getRepository(Category::class)->findAll();
         return $this->render('contact/index.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'category' => $category,
         ]);
     }
 

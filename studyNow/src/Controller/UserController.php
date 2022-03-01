@@ -2,8 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
+use App\Entity\Tutorial;
 use App\Entity\User;
 use App\Form\UserType;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -17,11 +20,19 @@ class UserController extends AbstractController
     /**
      * @Route("/user", name="user")
      */
-    public function index(): Response
+    public function index(EntityManagerInterface $em): Response
     {
+
+        $user = $this->getUser();
+        $tutorial = $em->getRepository(Tutorial::class)->find($user->getUserIdentifier());
+        $category = $em->getRepository(Category::class)->findAll();
 
         return $this->render('user/index.html.twig', [
             'controller_name' => 'UserController',
+            'user' => $user,
+            'tutorial' => $tutorial,
+            'category' => $category,
+
         ]);
     }
 
@@ -57,6 +68,25 @@ class UserController extends AbstractController
         return $this->render('user/edit.html.twig', [
             'controller_name' => 'UserController',
             'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/profile", name="profile")
+     */
+    public function profile(EntityManagerInterface $em): Response
+    {
+
+        $user = $this->getUser();
+        $tutorial = $em->getRepository(Tutorial::class)->find($user->getUserIdentifier());
+        $category = $em->getRepository(Category::class)->findAll();
+
+        return $this->render('user/profile.html.twig', [
+            'controller_name' => 'UserController',
+            'user' => $user,
+            'tutorial' => $tutorial,
+            'category' => $category,
+
         ]);
     }
 }
